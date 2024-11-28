@@ -1,5 +1,5 @@
 <script>
-    import logo from '$lib/images/logo.png';
+    import logo from '$lib/assets/images/logo.png';
 </script>
 
 <svelte:head>
