@@ -27,7 +27,7 @@
             </section>
         </section>
         <section class="flex-1 max-w-[500px]">
-            <img class="" src={logo} alt="All About Games">
+            <img src={logo} alt="All About Games">
         </section>
     </section>
 </section>

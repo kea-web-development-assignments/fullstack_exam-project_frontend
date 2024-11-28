@@ -1,5 +1,14 @@
-<aside class="fixed top-0 left-0 z-100 w-72 h-full bg-slate-900">
-    <ul class="p-4">
+<script>
+    import logo from '$lib/images/logo.png';
+</script>
+
+<aside class="top-0 left-0 z-100 w-72 h-full bg-slate-900">
+    <section class="flex p-4 pb-0">
+        <a href="/dashboard" class="w-40">
+            <img src={logo} alt="All About Games">
+        </a>
+    </section>
+    <ul class="p-4 pt-0">
         <li class="my-2">
             <a href="/search" class="flex items-center rounded-lg p-2 ml-3 hover:bg-gray-700">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">

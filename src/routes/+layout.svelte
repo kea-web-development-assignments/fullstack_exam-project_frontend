@@ -2,6 +2,6 @@
 	import '../app.css';
 </script>
 
-<section class="bg-gray-800 text-white font-[sans-serif] min-h-full w-full content-center justify-items-center">
+<section class="bg-gray-800 text-white font-[sans-serif] h-full w-full">
 	<slot />
 </section>
