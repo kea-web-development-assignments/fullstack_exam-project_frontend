@@ -3,6 +3,6 @@ import { goto } from "$app/navigation"
 
 export async function load() {
     if (browser && localStorage.getItem('token')) {
-        goto('/dashboard');
+        goto('/search');
     }
 }

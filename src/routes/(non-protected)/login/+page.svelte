@@ -43,7 +43,7 @@
 		localStorage.setItem('lastName', lastName);
 		localStorage.setItem('role', role);
 
-        goto('/dashboard');
+        goto('/search');
     }
 </script>
 
