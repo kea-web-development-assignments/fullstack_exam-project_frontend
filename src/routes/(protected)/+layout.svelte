@@ -12,6 +12,7 @@
     import ExitIcon from '$lib/assets/icons/ExitIcon.svelte';
     import BurgerMenu from '$lib/assets/icons/BurgerMenu.svelte';
     import XIcon from '$lib/assets/icons/XIcon.svelte';
+    import PuzzlePieceIcon from '$lib/assets/icons/PuzzlePieceIcon.svelte';
 
     let hideSidebar = true;
 
@@ -107,6 +108,21 @@
                     <span class="ml-3">Dropped</span>
                 </a>
             </li>
+            {#if localStorage.getItem('role') === 'admin'}
+                <div class="h-[1px] w-[90%] bg-gray-600 mx-auto my-6"></div>
+                <li>
+                    <span class="ml-5 text-gray-500 text-sm font-bold">Administration</span>
+                </li>
+                <li class="my-2">
+                    <a
+                        href="/admin/games" class="flex items-center rounded-lg p-2 ml-3 hover:bg-gray-700"
+                        class:bg-gray-700={$page.url.pathname.endsWith('/admin/games')}
+                    >
+                        <PuzzlePieceIcon />
+                        <span class="ml-3">Games</span>
+                    </a>
+                </li>
+            {/if}
             <div class="h-[1px] w-[90%] bg-gray-600 mx-auto my-6"></div>
             <li class="my-2">
                 <a
