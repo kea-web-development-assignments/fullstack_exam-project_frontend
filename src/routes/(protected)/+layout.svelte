@@ -131,7 +131,7 @@
         on:click={hideSidebar = true}
         aria-label="Hide sibebar"
     ></button>
-    <section class="min-h-screen h-full w-full flex justify-center items-center lg:pl-72">
+    <section class="min-h-screen h-full w-full flex flex-col justify-center items-center mt-14 lg:mt-0 lg:pl-72">
         <slot />
     </section>
 </section>
