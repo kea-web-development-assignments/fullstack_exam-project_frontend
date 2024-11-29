@@ -1,4 +1,5 @@
 <script>
+    import { page } from '$app/stores';
     import logo from '$lib/assets/images/logo.png';
     import SearchIcon from '$lib/assets/icons/SearchIcon.svelte';
     import CalendarIcon from '$lib/assets/icons/CalendarIcon.svelte';
@@ -40,7 +41,7 @@
             <li class="my-2">
                 <a
                     href="/search" class="flex items-center rounded-lg p-2 ml-3 hover:bg-gray-700"
-                    class:bg-gray-700={window.location.pathname.endsWith('/search')}
+                    class:bg-gray-700={$page.url.pathname.endsWith('/search')}
                 >
                     <SearchIcon />
                     <span class="ml-3">Search</span>
@@ -49,7 +50,7 @@
             <li class="my-2">
                 <a
                     href="/release-calendar" class="flex items-center rounded-lg p-2 ml-3 hover:bg-gray-700"
-                    class:bg-gray-700={window.location.pathname.endsWith('/release-calendar')}
+                    class:bg-gray-700={$page.url.pathname.endsWith('/release-calendar')}
                 >
                     <CalendarIcon />
                     <span class="ml-3">Release Calendar</span>
@@ -62,7 +63,7 @@
             <li class="my-2">
                 <a
                     href="/want-to-play" class="flex items-center rounded-lg p-2 ml-3 hover:bg-gray-700"
-                    class:bg-gray-700={window.location.pathname.endsWith('/want-to-play')}
+                    class:bg-gray-700={$page.url.pathname.endsWith('/want-to-play')}
                 >
                     <ClockIcon />
                     <span class="ml-3">Want To Play</span>
@@ -71,7 +72,7 @@
             <li class="my-2">
                 <a
                     href="/playing" class="flex items-center rounded-lg p-2 ml-3 hover:bg-gray-700"
-                    class:bg-gray-700={window.location.pathname.endsWith('/playing')}
+                    class:bg-gray-700={$page.url.pathname.endsWith('/playing')}
                 >
                     <PlayIcon />
                     <span class="ml-3">Playing</span>
@@ -80,7 +81,7 @@
             <li class="my-2">
                 <a
                     href="/completed" class="flex items-center rounded-lg p-2 ml-3 hover:bg-gray-700"
-                    class:bg-gray-700={window.location.pathname.endsWith('/completed')}
+                    class:bg-gray-700={$page.url.pathname.endsWith('/completed')}
                 >
                     <TickIcon />
                     <span class="ml-3">Completed</span>
@@ -89,7 +90,7 @@
             <li class="my-2">
                 <a
                     href="/paused" class="flex items-center rounded-lg p-2 ml-3 hover:bg-gray-700"
-                    class:bg-gray-700={window.location.pathname.endsWith('/paused')}
+                    class:bg-gray-700={$page.url.pathname.endsWith('/paused')}
                 >
                     <PauseIcon />
                     <span class="ml-3">Paused</span>
@@ -98,7 +99,7 @@
             <li class="my-2">
                 <a
                     href="/dropped" class="flex items-center rounded-lg p-2 ml-3 hover:bg-gray-700"
-                    class:bg-gray-700={window.location.pathname.endsWith('/dropped')}
+                    class:bg-gray-700={$page.url.pathname.endsWith('/dropped')}
                 >
                     <TrashIcon />
                     <span class="ml-3">Dropped</span>
@@ -108,7 +109,7 @@
             <li class="my-2">
                 <a
                     href="/settings" class="flex items-center rounded-lg p-2 ml-3 hover:bg-gray-700"
-                    class:bg-gray-700={window.location.pathname.endsWith('/settings')}
+                    class:bg-gray-700={$page.url.pathname.endsWith('/settings')}
                 >
                     <CogIcon />
                     <span class="ml-3">Settings</span>
