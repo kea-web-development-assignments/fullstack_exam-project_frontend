@@ -14,6 +14,8 @@
     import XIcon from '$lib/assets/icons/XIcon.svelte';
 
     let hideSidebar = true;
+
+    $: $page.url.pathname, hideSidebar = true;
 </script>
 
 <nav class="flex fixed items-center h-14 w-full z-10 bg-slate-900 p-4 pl-8 lg:hidden">
