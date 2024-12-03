@@ -1,1 +1,10 @@
 export { default as InputField } from './InputField.svelte';
+export { default as TextAreaField } from './TextAreaField.svelte';
+export { default as Form } from './Form.svelte';
+export { default as UserForm } from './UserForm.svelte';
+export { default as GameForm } from './GameForm.svelte';
+export { default as Modal } from './Modal.svelte';
+export { default as ImagePicker } from './ImagePicker.svelte';
+export { default as MultiSelectField } from './MultiSelectField.svelte';
+export { default as GameCard } from './GameCard.svelte';
+export { default as GameImage } from './GameImage.svelte';

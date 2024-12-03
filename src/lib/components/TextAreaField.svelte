@@ -1,14 +1,9 @@
 <script>
-    export let type = 'text';
     export let name = '';
     export let label = '';
     export let placeholder = '';
-    export let title = '';
-    export let pattern = '.*';
-    export let accept;
     export let required = false;
     export let requiredMarker = false;
-    export let multiple = false;
     export let value = '';
     export let errorMessage = '';
 
@@ -25,19 +20,14 @@
             <span class="text-rose-500">*</span>
         {/if}
     </label>
-    <input
-        class="w-full bg-gray-200 border border-gray-400 p-2 text-black"
+    <textarea
+        class="w-full h-[5.7rem] max-h-56 bg-gray-200 border border-gray-400 text-black p-2"
         {id}
-        {...{type}}
         {name}
         {placeholder}
-        {title}
-        {pattern}
-        {accept}
         {required}
-        {multiple}
         bind:value={value}
-    />
+    ></textarea>
     {#if errorMessage}
         <p class="text-rose-500">{errorMessage}</p>
     {/if}
