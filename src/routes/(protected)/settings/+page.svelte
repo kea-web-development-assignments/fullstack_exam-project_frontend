@@ -1,10 +1,9 @@
 <script>
     import { page } from '$app/stores';
     import { goto } from '$app/navigation';
-	import { InputField } from '$lib/components';
-	import { userFieldsLookup } from '$lib/utils/validator.js';
+	import { InputField, UserForm } from '$lib/components';
+	import { userFieldsRegex } from '$lib/utils/validator.js';
     import { PUBLIC_API_URL } from '$env/static/public';
-    import Form from '$lib/components/Form.svelte';
 
 	let updateForm;
 	let deleteForm;
@@ -12,7 +11,7 @@
 	let updateError = {};
 	let deleteError = {};
 
-    async function update(event) {
+    async function update() {
         updateError = {};
 		const user = Object.fromEntries(new FormData(updateForm));
 
@@ -40,7 +39,7 @@
 
         alert('Your account has been updated!');
     }
-    async function deleteAccount(event) {
+    async function deleteAccount() {
         deleteError = {};
 		const { password } = Object.fromEntries(new FormData(deleteForm));
 
@@ -73,9 +72,9 @@
 	<title>Settings | All About Games</title>
 </svelte:head>
 
-<section class="w-full flex flex-col justify-center items-center p-4">
+<section class="w-full flex flex-col justify-center items-center">
     <h2 class="max-w-[24rem] w-full text-4xl p-4 pl-0">Update account</h2>
-    <Form
+    <UserForm
         bind:thisForm={updateForm}
         submitText="Update"
         errorMessage={updateError?.message}
@@ -94,7 +93,7 @@
             label="First name"
             placeholder="John"
             title="Must be between 1-30 characters"
-            pattern={userFieldsLookup.firstName.regex}
+            pattern={userFieldsRegex.firstName}
             value={$page.data?.user?.firstName}
             errorMessage={updateError?.fields?.firstName}
         />
@@ -103,7 +102,7 @@
             label="Last name"
             placeholder="Doe"
             title="Must be between 1-30 characters"
-            pattern={userFieldsLookup.lastName.regex}
+            pattern={userFieldsRegex.lastName}
             value={$page.data?.user?.lastName}
             errorMessage={updateError?.fields?.lastName}
         />
@@ -113,7 +112,7 @@
             label="Email"
             placeholder="john@doe.com"
             title="Must be a valid email address"
-            pattern={userFieldsLookup.email.regex}
+            pattern={userFieldsRegex.email}
             value={$page.data?.user?.email}
             errorMessage={updateError?.fields?.email}
         />
@@ -123,7 +122,7 @@
             label="Password"
             placeholder="Password123!"
             title="Must be between 1-50 characters"
-            pattern={userFieldsLookup.password.regex}
+            pattern={userFieldsRegex.password}
             errorMessage={updateError?.fields?.password}
         />
         <InputField
@@ -132,9 +131,9 @@
             label="Old password"
             placeholder="Password1"
         />
-    </Form>
-    <h2 class="max-w-[24rem] w-full text-4xl mt-8 p-4 pl-0">Delete account</h2>
-    <Form
+    </UserForm>
+    <h2 class="max-w-[24rem] w-full text-4xl mt-2 p-4 pl-0">Delete account</h2>
+    <UserForm
         bind:thisForm={deleteForm}
         submitText="Delete"
         errorMessage={deleteError?.message}
@@ -148,5 +147,5 @@
             placeholder="Password123!"
             errorMessage={deleteError?.fields?.password}
         />
-    </Form>
+    </UserForm>
 </section>

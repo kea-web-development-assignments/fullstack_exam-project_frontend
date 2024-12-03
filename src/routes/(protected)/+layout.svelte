@@ -20,7 +20,7 @@
 </script>
 
 <nav class="flex fixed items-center h-14 w-full z-10 bg-slate-900 p-4 pl-8 lg:hidden">
-    <button on:click={hideSidebar = false}>
+    <button on:click={() => hideSidebar = false}>
         <BurgerMenu />
     </button>
 </nav>
@@ -35,7 +35,7 @@
             </a>
             <button
                 class="h-min lg:hidden"
-                on:click={hideSidebar = true}
+                on:click={() => hideSidebar = true}
             >
                 <XIcon />
             </button>
@@ -144,10 +144,12 @@
     <button
         class="fixed w-screen h-screen z-20 bg-black opacity-30 overscroll-contain lg:hidden"
         class:hidden={hideSidebar}
-        on:click={hideSidebar = true}
+        on:click={() => hideSidebar = true}
         aria-label="Hide sibebar"
     ></button>
-    <section class="min-h-screen h-full w-full flex flex-col justify-center items-center mt-14 lg:mt-0 lg:pl-72">
-        <slot />
+    <section class="min-h-[calc(100vh-3.5rem)] w-full content-center justify-items-center mt-14 lg:min-h-screen lg:mt-0 lg:pl-72">
+        <section class="h-full max-w-[1400px] content-center justify-items-center p-4">
+            <slot />
+        </section>
     </section>
 </section>
