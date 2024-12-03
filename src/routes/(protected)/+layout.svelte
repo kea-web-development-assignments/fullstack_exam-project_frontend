@@ -148,7 +148,7 @@
         aria-label="Hide sibebar"
     ></button>
     <section class="min-h-[calc(100vh-3.5rem)] w-full content-center justify-items-center mt-14 lg:min-h-screen lg:mt-0 lg:pl-72">
-        <section class="h-full max-w-[1400px] content-center justify-items-center p-4">
+        <section class="h-full max-w-[1400px] w-full content-center justify-items-center p-4">
             <slot />
         </section>
     </section>
