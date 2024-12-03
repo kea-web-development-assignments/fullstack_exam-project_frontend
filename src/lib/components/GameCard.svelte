@@ -6,6 +6,7 @@
     import { invalidateAll } from '$app/navigation';
 
     export let _id;
+    export let slug;
     export let name;
     export let releaseDate;
     export let description;
@@ -101,7 +102,10 @@
     }
 </script>
 
-<section class="w-[20rem] min-w-[0] flex flex-col bg-slate-200 text-black rounded-md drop-shadow-around-md duration-200 hover:transform hover:-translate-y-1">
+<a
+    href={`/games/${slug}`}
+    class="w-[20rem] min-w-[0] flex flex-col bg-slate-200 text-black rounded-md drop-shadow-around-md duration-200 hover:transform hover:-translate-y-1"
+>
     <GameImage
         src={image}
         alt={name}
@@ -130,7 +134,7 @@
             {/if}
         </section>
     </section>
-</section>
+</a>
 
 <Modal
     bind:showModal={showUpdateGameModal}
@@ -214,7 +218,7 @@
                 class="w-full bg-blue-500 text-white text-center text-lg rounded-lg cursor-pointer p-1"
                 on:click={() => showDeleteGameModal = false}
             >
-                Cancel
+                Close
             </button>
             <button
                 class="w-full bg-rose-500 text-white text-center text-lg rounded-lg cursor-pointer p-1"
