@@ -1,4 +1,7 @@
 <script>
+    export let containerClass = '';
+    export let labelClass = 'text-black pl-1';
+    export let inputClass = 'w-full bg-gray-200 border border-gray-400 rounded-sm p-2 text-black';
     export let type = 'text';
     export let name = '';
     export let label = '';
@@ -15,9 +18,9 @@
     let id = crypto.randomUUID();
 </script>
 
-<section>
+<section class={containerClass}>
     <label
-        class="pl-1 text-black"
+        class={labelClass}
         for={id}
     >
         {label}
@@ -26,7 +29,7 @@
         {/if}
     </label>
     <input
-        class="w-full bg-gray-200 border border-gray-400 p-2 text-black"
+        class={inputClass}
         {id}
         {...{type}}
         {name}
@@ -37,6 +40,7 @@
         {required}
         {multiple}
         bind:value={value}
+        on:change
     />
     {#if errorMessage}
         <p class="text-rose-500">{errorMessage}</p>

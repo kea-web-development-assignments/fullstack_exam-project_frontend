@@ -158,11 +158,11 @@
                     {#if $page.data.game.platforms?.length}
                         {#each $page.data.game.platforms as platform, i}
                             {#if i < $page.data.game.platforms.length - 1}
-                                <a class="underline" href="/search?platform={platform.name}">
+                                <a class="underline" href="/search?platforms={JSON.stringify([ platform.name ])}">
                                     {platform.name}
                                 </a>, &nbsp;
                             {:else}
-                                <a class="underline" href="/search?platform={platform.name}">
+                                <a class="underline" href="/search?platforms={JSON.stringify([ platform.name ])}">
                                     {platform.name}
                                 </a>
                             {/if}
@@ -178,11 +178,11 @@
                     {#if $page.data.game.tags?.length}
                         {#each $page.data.game.tags as tag, i}
                             {#if i < $page.data.game.tags.length - 1}
-                                <a class="underline" href="/search?tag={tag.name}">
+                                <a class="underline" href="/search?tags={JSON.stringify([ tag.name ])}">
                                     {tag.name}
                                 </a>, &nbsp;
                             {:else}
-                                <a class="underline" href="/search?tag={tag.name}">
+                                <a class="underline" href="/search?tags={JSON.stringify([ tag.name ])}">
                                     {tag.name}
                                 </a>
                             {/if}

@@ -1,6 +1,9 @@
 <script>
     import MultiSelect from 'svelte-multiselect';
 
+    export let containerClass = '';
+    export let labelClass = 'text-black pl-1';
+    export let multiSelectClass = 'w-full bg-gray-200 border border-gray-400 p-2 text-black';
     export let name = '';
     export let label = '';
     export let placeholder = '';
@@ -15,9 +18,9 @@
     let showDropdown;
 </script>
 
-<section>
+<section class={containerClass}>
     <label
-        class="pl-1 text-black"
+        class={labelClass}
         for={id}
     >
         {label}
@@ -28,15 +31,16 @@
     <MultiSelect
         bind:outerDiv={outerDivElement}
         bind:open={showDropdown}
-        outerDivClass="w-full bg-gray-200 border border-gray-400 p-2 text-black"
+        outerDivClass={multiSelectClass}
         noMatchingOptionsMsg="No matching {name}"
         maxOptions={5}
         selectedOptionsDraggable={false}
         --sms-placeholder-color="gray"
+        --sms-remove-btn-hover-bg="red"
         {id}
         {name}
         {placeholder}
-        {selected}
+        bind:selected={selected}
         {options}
         {required}
         on:blur={() => {
@@ -44,6 +48,7 @@
                 showDropdown = false;
             }
         }}
+        on:change
     />
     {#if errorMessage}
         <p class="text-rose-500">{errorMessage}</p>

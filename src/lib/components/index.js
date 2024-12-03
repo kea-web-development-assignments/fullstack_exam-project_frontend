@@ -8,3 +8,4 @@ export { default as ImagePicker } from './ImagePicker.svelte';
 export { default as MultiSelectField } from './MultiSelectField.svelte';
 export { default as GameCard } from './GameCard.svelte';
 export { default as GameImage } from './GameImage.svelte';
+export { default as GameSearchBar } from './GameSearchBar.svelte';
