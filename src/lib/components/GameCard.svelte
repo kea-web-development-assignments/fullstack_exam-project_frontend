@@ -4,6 +4,7 @@
     import { gameFieldsRegex } from '$lib/utils/validator.js';
     import { PUBLIC_API_URL } from '$env/static/public';
     import { invalidateAll } from '$app/navigation';
+    import { createEventDispatcher } from 'svelte';
 
     export let _id;
     export let slug;
@@ -25,6 +26,8 @@
 
 	let updateError = {};
 	let deleteError = {};
+
+    const dispatch = createEventDispatcher();
 
     async function updateGame() {
         updateError = {};
@@ -72,6 +75,7 @@
 		}
 
         showUpdateGameModal = false;
+        dispatch('change');
         await invalidateAll();
     }
 
@@ -99,6 +103,7 @@
 		}
 
         showDeleteGameModal = false;
+        dispatch('change');
         await invalidateAll();
     }
 
@@ -123,6 +128,7 @@
             return;
         }
 
+        dispatch('change');
         await invalidateAll();
     }
 </script>
@@ -130,6 +136,7 @@
 <a
     href={`/games/${slug}`}
     class="w-[20rem] min-w-[0] flex flex-col bg-slate-200 text-black rounded-md drop-shadow-around-md duration-200 hover:transform hover:-translate-y-1"
+    data-sveltekit-preload-data="tap"
 >
     <GameImage
         src={image}

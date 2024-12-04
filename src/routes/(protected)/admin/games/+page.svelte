@@ -1,13 +1,21 @@
 <script>
     import { page } from '$app/stores';
-    import { Modal, InputField, TextAreaField, GameForm, ImagePicker, MultiSelectField, GameCard } from '$lib/components';
+    import { Modal, InputField, TextAreaField, GameForm, ImagePicker, MultiSelectField, GameCard, Paginator, GameSearchBar } from '$lib/components';
     import { gameFieldsRegex } from '$lib/utils/validator.js';
     import { PUBLIC_API_URL } from '$env/static/public';
-    import { invalidateAll } from '$app/navigation';
+    import { invalidateAll, goto } from '$app/navigation';
+    import { onMount } from 'svelte';
 
     let showAddGameModal = false;
     let addGameForm;
     let addGameError = {};
+
+    let searchQuery = '';
+    let gamesCount = 0;
+    let start = 0;
+    let limit = 30;
+    let currentPage = 1;
+    let searchPromise = searchGames();
 
     async function addGame() {
         addGameError = {};
@@ -57,33 +65,108 @@
         showAddGameModal = false;
         await invalidateAll();
     }
+
+    async function searchGames() {
+        const searchObject = {
+            searchQuery,
+            start,
+            limit,
+            currentPage,
+        };
+
+        Object.keys(searchObject).forEach(key => {
+            if (searchObject[key] === '' || searchObject[key] === '[]' || searchObject[key] === undefined) {
+                delete searchObject[key];
+            }
+        });
+
+        const searchParams = new URLSearchParams(searchObject);
+        goto(`?${searchParams.toString()}`, { keepFocus: true });
+
+        try {
+            const response = await fetch(`${PUBLIC_API_URL}/games?${searchParams.toString()}`, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                }
+            });
+            const data = await response.json();
+
+            if(!isNaN(parseInt(data.count))) {
+                gamesCount = parseInt(data.count);
+            }
+
+            return data;
+        } catch (error) {
+            console.error('Failed to search games:', error);
+            return {
+                error: { message: 'Something went wrong while searching for games. Please try again later.' }
+            }
+        }
+    }
+
+    function onSearch() {
+        searchPromise = searchGames();
+    }
+
+    onMount(() => {
+        const urlParams = Object.fromEntries($page.url.searchParams);
+
+        if(urlParams.searchQuery) {
+            searchQuery = urlParams.query;
+        }
+        if (urlParams.start) {
+            start = parseInt(urlParams.start);
+        }
+        if (urlParams.limit) {
+            limit = parseInt(urlParams.limit);
+        }
+        if (urlParams.currentPage) {
+            currentPage = parseInt(urlParams.currentPage);
+        }
+
+        searchPromise = searchGames();
+    });
 </script>
 
 <svelte:head>
     <title>Manage Games | All About Games</title>
 </svelte:head>
 
-<section class="h-full w-full flex-col">
-    <section class="w-full flex flex-col gap-8 justify-between p-8 sm:flex-row">
-        <h1 class="text-5xl">Manage Games</h1>
-        <button
-            class="bg-blue-600 text-white font-bold px-4 py-2 rounded"
-            on:click={() => showAddGameModal = true}
-        >+ Add Game</button>
+<section class="h-full w-full flex flex-col items-center mt-4">
+    <GameSearchBar
+        placeholder="The Witcher 3..."
+        bind:query={searchQuery}
+        on:search={onSearch}
+    />
+    <section class="h-fit w-full flex flex-wrap justify-center gap-4 mt-8">
+        {#await searchPromise}
+            <p class="text-xl text-center font-bold p-10">Searching for games...</p>
+        {:then data}
+            {#if data.error}
+                <p class="text-xl text-center font-bold p-10">{data.error.message}</p>
+            {:else}
+                {#if data.games?.length}
+                    {#each data.games as game}
+                        <GameCard
+                            {...game}
+                            showUpdateButton
+                            showDeleteButton
+                            on:change={onSearch}
+                        />
+                    {/each}
+                {:else}
+                    <p class="text-xl text-center font-bold p-10">No games found</p>
+                {/if}
+            {/if}
+        {/await}
     </section>
-    <section class="h-fit w-full flex flex-wrap justify-center gap-4">
-        {#if $page.data.games.length}
-            {#each $page.data.games as game}
-                <GameCard
-                    {...game}
-                    showUpdateButton
-                    showDeleteButton
-                />
-            {/each}
-        {:else}
-            <p class="text-xl text-center font-bold p-10">No games to list</p>
-        {/if}
-    </section>
+    <Paginator
+        totalItems={gamesCount}
+        limit={limit}
+        bind:start={start}
+        bind:currentPage={currentPage}
+        on:change={onSearch}
+    />
 </section>
 
 <Modal
