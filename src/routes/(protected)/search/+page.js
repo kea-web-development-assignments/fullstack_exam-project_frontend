@@ -1,9 +1,9 @@
 import { PUBLIC_API_URL } from '$env/static/public';
 
 export async function load() {
-    let tagsData, platformsData, gamesCountData;
+    let tagsData, platformsData;
     try {
-        const [tagsResponse, platformsResponse, gamesCountResponse] = await Promise.all([
+        const [tagsResponse, platformsResponse] = await Promise.all([
             fetch(`${PUBLIC_API_URL}/tags`, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -14,28 +14,21 @@ export async function load() {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`,
                 }
             }),
-            fetch(`${PUBLIC_API_URL}/games-count`, {
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
-                }
-            }),
         ]);
 
-        [tagsData, platformsData, gamesCountData] = await Promise.all([
+        [tagsData, platformsData] = await Promise.all([
             tagsResponse.json(),
             platformsResponse.json(),
-            gamesCountResponse.json(),
         ]);
     } catch (error) {
-        console.error('Failed to get tags, platforms, and games count:', error);
+        console.error('Failed to get tags and platforms:', error);
         return {
-            error: { message: 'Something went wrong while fetching tags, platforms, and games count.' }
+            error: { message: 'Something went wrong while fetching tags and platforms.' }
         };
     }
 
     return {
         tags: tagsData?.tags || [],
         platforms: platformsData?.platforms || [],
-        gamesCount: gamesCountData?.count || 0,
     };
 }
