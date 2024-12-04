@@ -16,6 +16,7 @@
     export let platforms;
     export let showDeleteButton;
     export let showUpdateButton;
+    export let showRemoveFromListButton;
 
     let updateGameForm;
 
@@ -100,6 +101,30 @@
         showDeleteGameModal = false;
         await invalidateAll();
     }
+
+    async function removeGameFromList() {
+        let data;
+        try {
+            const response = await fetch(`${PUBLIC_API_URL}/me/list/${_id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                },
+            });
+            data = await response.json();
+        } catch (err) {
+            console.error('Failed to remove game from list:', err);
+            alert('Something went wrong with removing the game from your list, try again later');
+            return;
+        }
+
+        if(data.error) {
+            alert(data.error);
+            return;
+        }
+
+        await invalidateAll();
+    }
 </script>
 
 <a
@@ -116,6 +141,14 @@
             <p class="text-ellipsis overflow-hidden line-clamp-3">{description}</p>
         </section>
         <section class="flex justify-end text-lg gap-2">
+            {#if showRemoveFromListButton}
+                <button
+                    class="w-3/5 bg-rose-500 text-white text-center rounded-lg cursor-pointer p-1"
+                    on:click|stopPropagation|preventDefault={removeGameFromList}
+                >
+                    Remove from list
+                </button>
+            {/if}
             {#if showDeleteButton}
                 <button
                     class="w-1/3 bg-rose-500 text-white text-center rounded-lg cursor-pointer p-1"

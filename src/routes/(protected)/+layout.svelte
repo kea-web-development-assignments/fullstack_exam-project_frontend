@@ -65,8 +65,8 @@
             </li>
             <li class="my-2">
                 <a
-                    href="/want-to-play" class="flex items-center rounded-lg p-2 ml-3 hover:bg-gray-700"
-                    class:bg-gray-700={$page.url.pathname.endsWith('/want-to-play')}
+                    href="/lists/want-to-play" class="flex items-center rounded-lg p-2 ml-3 hover:bg-gray-700"
+                    class:bg-gray-700={$page.url.pathname.endsWith('/lists/want-to-play')}
                 >
                     <ClockIcon />
                     <span class="ml-3">Want To Play</span>
@@ -74,8 +74,8 @@
             </li>
             <li class="my-2">
                 <a
-                    href="/playing" class="flex items-center rounded-lg p-2 ml-3 hover:bg-gray-700"
-                    class:bg-gray-700={$page.url.pathname.endsWith('/playing')}
+                    href="/lists/playing" class="flex items-center rounded-lg p-2 ml-3 hover:bg-gray-700"
+                    class:bg-gray-700={$page.url.pathname.endsWith('/lists/playing')}
                 >
                     <PlayIcon />
                     <span class="ml-3">Playing</span>
@@ -83,8 +83,8 @@
             </li>
             <li class="my-2">
                 <a
-                    href="/completed" class="flex items-center rounded-lg p-2 ml-3 hover:bg-gray-700"
-                    class:bg-gray-700={$page.url.pathname.endsWith('/completed')}
+                    href="/lists/completed" class="flex items-center rounded-lg p-2 ml-3 hover:bg-gray-700"
+                    class:bg-gray-700={$page.url.pathname.endsWith('/lists/completed')}
                 >
                     <TickIcon />
                     <span class="ml-3">Completed</span>
@@ -92,8 +92,8 @@
             </li>
             <li class="my-2">
                 <a
-                    href="/paused" class="flex items-center rounded-lg p-2 ml-3 hover:bg-gray-700"
-                    class:bg-gray-700={$page.url.pathname.endsWith('/paused')}
+                    href="/lists/paused" class="flex items-center rounded-lg p-2 ml-3 hover:bg-gray-700"
+                    class:bg-gray-700={$page.url.pathname.endsWith('/lists/paused')}
                 >
                     <PauseIcon />
                     <span class="ml-3">Paused</span>
@@ -101,8 +101,8 @@
             </li>
             <li class="my-2">
                 <a
-                    href="/dropped" class="flex items-center rounded-lg p-2 ml-3 hover:bg-gray-700"
-                    class:bg-gray-700={$page.url.pathname.endsWith('/dropped')}
+                    href="/lists/dropped" class="flex items-center rounded-lg p-2 ml-3 hover:bg-gray-700"
+                    class:bg-gray-700={$page.url.pathname.endsWith('/lists/dropped')}
                 >
                     <TrashIcon />
                     <span class="ml-3">Dropped</span>
