@@ -63,6 +63,7 @@
         }
 
         showAddGameModal = false;
+        await onSearch();
         await invalidateAll();
     }
 
@@ -133,6 +134,13 @@
 </svelte:head>
 
 <section class="h-full w-full flex flex-col items-center mt-4">
+    <section class="w-full flex flex-col gap-4 justify-between p-2 mb-8 sm:flex-row">
+        <h1 class="text-5xl">Manage Games</h1>
+        <button
+            class="bg-blue-600 text-white font-bold px-4 py-2 rounded"
+            on:click={() => showAddGameModal = true}
+        >+ Add Game</button>
+    </section>
     <GameSearchBar
         placeholder="The Witcher 3..."
         bind:query={searchQuery}
