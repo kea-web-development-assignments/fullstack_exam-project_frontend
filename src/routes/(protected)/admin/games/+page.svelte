@@ -59,6 +59,10 @@
     }
 </script>
 
+<svelte:head>
+    <title>Manage Games | All About Games</title>
+</svelte:head>
+
 <section class="h-full w-full flex-col">
     <section class="w-full flex flex-col gap-8 justify-between p-8 sm:flex-row">
         <h1 class="text-5xl">Manage Games</h1>

@@ -83,6 +83,10 @@
     }
 </script>
 
+<svelte:head>
+    <title>{$page.data.game.name} | All About Games</title>
+</svelte:head>
+
 <section class="h-full w-full flex flex-col gap-4 xl:[display:grid_!important] [grid-template-areas:'title_screenshots''content_screenshots''content_screenshots'] grid-cols-2">
     <section class="xl:h-full flex justify-center items-end">
         <h1 class="[grid-area:title] text-4xl font-bold text-center line-clamp-2 md:text-ellipsis md:overflow-hidden">
