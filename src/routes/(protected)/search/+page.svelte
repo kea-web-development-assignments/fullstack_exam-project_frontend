@@ -2,7 +2,7 @@
     import { goto } from '$app/navigation';
     import { page } from '$app/stores';
     import { PUBLIC_API_URL } from '$env/static/public';
-    import { GameCard, GameSearchBar, InputField, MultiSelectField } from '$lib/components';
+    import { GameCard, GameSearchBar, InputField, MultiSelectField, Paginator } from '$lib/components';
     import { onMount } from 'svelte';
 
     let searchQuery = '';
@@ -10,6 +10,10 @@
     let selectedPlatforms = [];
     let fromDate;
     let toDate;
+    let gamesCount = 0;
+    let start = 0;
+    let limit = 30;
+    let currentPage = 1;
     let searchPromise = searchGames();
 
     async function searchGames() {
@@ -19,6 +23,9 @@
             platforms: JSON.stringify(selectedPlatforms),
             from: fromDate,
             to: toDate,
+            start,
+            limit,
+            currentPage,
         };
 
         Object.keys(searchObject).forEach(key => {
@@ -37,6 +44,10 @@
                 }
             });
             const data = await response.json();
+
+            if(!isNaN(parseInt(data.count))) {
+                gamesCount = parseInt(data.count);
+            }
 
             return data;
         } catch (error) {
@@ -68,6 +79,15 @@
         }
         if(urlParams.to) {
             toDate = new Date(urlParams.to);
+        }
+        if (urlParams.start) {
+            start = parseInt(urlParams.start);
+        }
+        if (urlParams.limit) {
+            limit = parseInt(urlParams.limit);
+        }
+        if (urlParams.currentPage) {
+            currentPage = parseInt(urlParams.currentPage);
         }
 
         searchPromise = searchGames();
@@ -141,4 +161,11 @@
             {/if}
         {/await}
     </section>
+    <Paginator
+        totalItems={gamesCount}
+        limit={limit}
+        bind:start={start}
+        bind:currentPage={currentPage}
+        on:change={onSearch}
+    />
 </section>

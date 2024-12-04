@@ -9,3 +9,5 @@ export { default as MultiSelectField } from './MultiSelectField.svelte';
 export { default as GameCard } from './GameCard.svelte';
 export { default as GameImage } from './GameImage.svelte';
 export { default as GameSearchBar } from './GameSearchBar.svelte';
+export { default as Paginator } from './Paginator.svelte';
+export { default as PaginatorButton } from './PaginatorButton.svelte';
