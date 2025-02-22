@@ -1,0 +1,8 @@
+FROM nginx
+WORKDIR /
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./allaboutgames.xyz.pem /etc/ssl/allaboutgames.xyz.pem
+COPY ./allaboutgames.xyz.key /etc/ssl/allaboutgames.xyz.key
+EXPOSE 80
+EXPOSE 443
+CMD ["nginx", "-g", "daemon off;"]
